@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zona Turística - Guía Oficial</title>
+
+    <style>
+
+        :root {
+            --accent: #ff4757;
+            --dark: #2f3542;
+            --glass: rgba(15, 15, 15, 0.95);
+        }
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            overflow: hidden;
+        }
+
+        /* ===== BOTÓN MENÚ ===== */
+
+        .box-trigger {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border-radius: 12px;
+            z-index: 1000;
+            box-shadow: 0 10px 20px rgba(255, 71, 87, 0.3);
+            transition: 0.3s;
+        }
+
+        .box-trigger:hover{
+            transform: scale(1.1);
+        }
+
+        .menu-icon{
+            width:30px;
+            height:3px;
+            background:white;
+            position:relative;
+        }
+
+        .menu-icon::before,
+        .menu-icon::after{
+            content:"";
+            position:absolute;
+            width:30px;
+            height:3px;
+            background:white;
+            left:0;
+        }
+
+        .menu-icon::before{
+            top:-8px;
+        }
+
+        .menu-icon::after{
+            top:8px;
+        }
+
+        /* ===== MENÚ LATERAL ===== */
+
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 400px;
+            height: 100%;
+            background: var(--glass);
+            backdrop-filter: blur(25px);
+            z-index: 999;
+            transition: 0.6s cubic-bezier(0.85, 0, 0.15, 1);
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .menu-overlay.active {
+            right: 0;
+        }
+
+        .menu-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .menu-logo {
+            width: 70px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            margin-bottom:15px;
+        }
+
+        .menu-section {
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .section-title {
+            width: 100%;
+            background: none;
+            border: none;
+            color: white;
+            text-align: left;
+            font-size: 1.1rem;
+            font-weight: bold;
+            padding: 15px 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+
+        .section-title:hover {
+            color: var(--accent);
+        }
+
+        .section-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            color: #ced4da;
+            line-height: 1.7;
+        }
+
+        .section-content ul{
+            list-style:none;
+            padding-bottom:20px;
+        }
+
+        .section-content li{
+            margin-bottom:10px;
+            padding-left:15px;
+            border-left:2px solid var(--accent);
+        }
+
+        .section-active .section-content {
+            max-height: 300px;
+        }
+
+        /* ===== HERO ===== */
+
+        .hero-text {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-left: 10%;
+        }
+
+        /* ===== TEXTO ANIMADO ===== */
+
+        #animatedText{
+            font-size:4rem;
+            font-weight:800;
+            line-height:1.2;
+            white-space:pre-line;
+            border-right:4px solid var(--accent);
+            width:fit-content;
+            text-shadow:
+                0 0 10px rgba(255,255,255,0.4),
+                0 0 20px rgba(255,71,87,0.4);
+            animation: cursorBlink .7s infinite;
+        }
+
+        .accent{
+            color:var(--accent);
+        }
+
+        @keyframes cursorBlink{
+            50%{
+                border-color:transparent;
+            }
+        }
+
+        /* ===== EFECTO ENTRADA ===== */
+
+        .hero-text{
+            animation: fadeIn 2s ease;
+        }
+
+        @keyframes fadeIn{
+            from{
+                opacity:0;
+                transform:translateY(40px);
+            }
+
+            to{
+                opacity:1;
+                transform:translateY(0);
+            }
+        }
+
+        /* ===== RESPONSIVE ===== */
+
+        @media(max-width:768px){
+
+            .menu-overlay{
+                width:100%;
+            }
+
+            #animatedText{
+                font-size:2.5rem;
+            }
+
+            .hero-text{
+                padding:40px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- BOTÓN -->
+
+    <div class="box-trigger" onclick="toggleMenu()">
+        <div class="menu-icon"></div>
+    </div>
+
+    <!-- MENÚ -->
+
+    <nav class="menu-overlay" id="navMenu">
+
+        <div class="menu-header">
+            <img src="https://cdn-icons-png.flaticon.com/512/826/826070.png" class="menu-logo">
+            <h2>GUÍA DE VIAJE</h2>
+        </div>
+
+        <!-- DESTINOS -->
+
+        <div class="menu-section">
+
+            <button class="section-title" onclick="toggleSection(this)">
+                Destinos <span>+</span>
+            </button>
+
+            <div class="section-content">
+
+                <ul>
+                    <li><strong>Cancún:</strong> Playas y vida nocturna.</li>
+                    <li><strong>Bali:</strong> Templos y naturaleza.</li>
+                    <li><strong>Santorini:</strong> Atardeceres mágicos.</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+        <!-- AVENTURAS -->
+
+        <div class="menu-section">
+
+            <button class="section-title" onclick="toggleSection(this)">
+                Aventuras <span>+</span>
+            </button>
+
+            <div class="section-content">
+
+                <ul>
+                    <li>Paracaidismo sobre los Alpes.</li>
+                    <li>Buceo en la Gran Barrera.</li>
+                    <li>Senderismo en Machu Picchu.</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+        <!-- HOTELES -->
+
+        <div class="menu-section">
+
+            <button class="section-title" onclick="toggleSection(this)">
+                Hoteles <span>+</span>
+            </button>
+
+            <div class="section-content">
+
+                <ul>
+                    <li><strong>Eco-Lodge:</strong> Naturaleza premium.</li>
+                    <li><strong>Resorts 5★:</strong> Todo incluido.</li>
+                    <li><strong>Boutique:</strong> Estilo urbano.</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+        <!-- CONTACTO -->
+
+        <div class="menu-section">
+
+            <button class="section-title" onclick="toggleSection(this)">
+                Contacto <span>+</span>
+            </button>
+
+            <div class="section-content">
+
+                <p style="padding-bottom:20px;">
+                    📍 Calle Viajera 123, Madrid<br><br>
+                    📞 +34 900 123 456<br><br>
+                    ✉️ ayuda@turismo.com
+                </p>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <!-- HERO -->
+
+    <main class="hero-text">
+        <h1 id="animatedText"></h1>
+    </main>
+
+    <script>
+
+        // ===== MENÚ =====
+
+        function toggleMenu() {
+
+            document
+                .getElementById('navMenu')
+                .classList.toggle('active');
+        }
+
+        function toggleSection(button) {
+
+            const section = button.parentElement;
+
+            section.classList.toggle('section-active');
+
+            const span = button.querySelector('span');
+
+            span.innerText =
+                section.classList.contains('section-active')
+                ? '-'
+                : '+';
+        }
+
+        // ===== FONDO ALEATORIO =====
+
+        const fondos = [
+
+            "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1350&q=80",
+
+            "https://images.unsplash.com/photo-1493558103817-58b2924bce98?auto=format&fit=crop&w=1350&q=80",
+
+            "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1350&q=80",
+
+            "https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=1350&q=80",
+
+            "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1350&q=80"
+        ];
+
+        const imagenAleatoria =
+            fondos[Math.floor(Math.random() * fondos.length)];
+
+        document.body.style.backgroundImage =
+
+            `linear-gradient(
+                rgba(0,0,0,0.55),
+                rgba(0,0,0,0.55)
+            ),
+            url('${imagenAleatoria}')`;
+
+        // ===== ANIMACIÓN TEXTO =====
+
+        const texto = [
+            { text: "DESCUBRE", accent: false },
+            { text: "TU PRÓXIMO", accent: true },
+            { text: "DESTINO", accent: false }
+        ];
+
+        const elemento =
+            document.getElementById("animatedText");
+
+        let linea = 0;
+        let letra = 0;
+
+        function escribirTexto() {
+
+            if (linea < texto.length) {
+
+                const actual = texto[linea];
+
+                if (letra < actual.text.length) {
+
+                    const span = actual.accent
+                        ? `<span class="accent">${actual.text[letra]}</span>`
+                        : actual.text[letra];
+
+                    elemento.innerHTML += span;
+
+                    letra++;
+
+                    setTimeout(escribirTexto, 90);
+
+                } else {
+
+                    elemento.innerHTML += "<br>";
+
+                    linea++;
+                    letra = 0;
+
+                    setTimeout(escribirTexto, 300);
+                }
+            }
+        }
+
+        escribirTexto();
+
+    </script>
+
+</body>
+</html>
