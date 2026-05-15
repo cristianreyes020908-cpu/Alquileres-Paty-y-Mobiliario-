@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Alquileres Paty</title>
+
+    <style>
+        /* Eliminamos el color fijo de background para que el script tome el control */
+        body {
+            margin: 0;
+            font-family: Arial;
+            transition: background 0.5s ease; /* Transición suave para el cambio de color */
+        }
+
+        .barra {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            background: #000;
+            color: #fff;
+            padding: 15px;
+        }
+
+        .menu {
+            position: fixed;
+            top: 100px;
+            left: 20px;
+            width: 200px;
+        }
+
+        .menu button {
+            width: 100%;
+            margin: 5px 0;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background: #fff;
+        }
+
+        .menu button:hover {
+            background: #f0f0f0;
+        }
+
+        .contenido {
+            margin-left: 240px;
+            padding: 20px;
+        }
+
+        .seccion {
+            display: none;
+            background: rgba(255, 255, 255, 0.9); /* Un blanco con transparencia para que luzca el fondo */
+            padding: 20px;
+            border-radius: 10px;
+            min-height: 400px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .activa {
+            display: block;
+        }
+
+        .submenu {
+            display: none;
+            margin-left: 15px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            text-align: center;
+        }
+
+        .card {
+            border: 2px solid #000;
+            border-radius: 10px;
+            padding: 10px;
+            background: #f9f9f9;
+        }
+
+        .card img {
+            width: 100%; /* Ajustado al 100% para que no se salga de la tarjeta */
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .cuadro {
+            border: 2px dashed #000;
+            padding: 10px;
+            border-radius: 20px; /* Redondeado más natural */
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="barra">
+        📍 Agencia el castillo | 🏠 #3 | 📞 9531135806
+    </div>
+
+    <h1 style="text-align:center;">ALQUILERES PATY</h1>
+
+    <div style="text-align: right; padding-right: 20px;">
+        <img src="logo paty.JPG" width="250" alt="Logo Paty">
+    </div>
+
+    <div class="menu">
+        <button onclick="mostrar('Mesas')">Mesas</button>
+        <button onclick="mostrar('Sillas')">Sillas</button>
+        <button onclick="mostrar('Manteleria')">Manteleria</button>
+        <button onclick="mostrar('Moños')">Moños</button>
+        <button onclick="mostrar('Cubres')">Cubres</button>
+        <button onclick="mostrar('Carpas')">Carpas</button>
+        <button onclick="mostrar('Lonas')">Lonas</button>
+        <button onclick="mostrar('Inflables')">Inflables</button>
+        <button onclick="mostrar('Banos')">Baños</button>
+
+        <button onclick="toggleSub()">Cristaleria ▾</button>
+        <div id="sub" class="submenu">
+            <button onclick="mostrar('Copas')">Copas</button>
+            <button onclick="mostrar('PlatoC')">Platos</button>
+            <button onclick="mostrar('Tazon')">Tazones</button>
+            <button onclick="mostrar('Jarron')">Jarrones</button>
+            <button onclick="mostrar('Soperas')">Soperas</button>
+            <button onclick="mostrar('Vasos')">Vasos</button>
+        </div>
+    </div>
+
+    <div class="contenido">
+
+        <div id="Mesas" class="seccion activa">
+            <h1>Mesas</h1>
+            <div class="grid">
+                <div class="card"><img src="mesa.JPG" alt=""><div class="cuadro">Mesa redonda</div></div>
+                <div class="card"><img src="mesa rec.JPG" alt=""><div class="cuadro">Mesa cuadrada</div></div>
+                <div class="card"><img src="media luna.JPG" alt=""><div class="cuadro">Mesa media luna</div></div>
+            </div>
+        </div>
+
+        <div id="Sillas" class="seccion">
+            <h2>Sillas</h2>
+            <div class="grid">
+                <div class="card"><img src="sillas lam.JPG" alt=""><div class="cuadro">Silla básica</div></div>
+                <div class="card"><img src="sillas tif.JPG" alt=""><div class="cuadro">Silla Tifanis</div></div>
+            </div>
+        </div>
+
+        <div id="Manteleria" class="seccion">
+            <h2>Mantelería</h2>
+            <div class="grid">
+                <div class="card"><img src="mantel b.PNG" alt=""><div class="cuadro">Mantel blanco</div></div>
+            </div>
+        </div>
+
+        <div id="Moños" class="seccion">
+            <h2>Moños</h2>
+            <div class="grid">
+                <div class="card"><img src="moñ azul.JPG" alt=""><div class="cuadro">Moño Azul</div></div>
+                <div class="card"><img src="moño negro.JPG" alt=""><div class="cuadro">Moño Negro</div></div>
+                <div class="card"><img src="moño verde.JPG" alt=""><div class="cuadro">Moño Verde</div></div>
+                <div class="card"><img src="moño morado.JPG" alt=""><div class="cuadro">Moño Morado</div></div>
+                <div class="card"><img src="moño plata.JPG" alt=""><div class="cuadro">Moño Plata</div></div>
+                <div class="card"><img src="moño dorado.JPG" alt=""><div class="cuadro">Moño Dorado</div></div>
+            </div>
+        </div>
+
+        <div id="Cubres" class="seccion">
+            <h2>Cubres</h2>
+            <div class="grid">
+                <div class="card"><img src="azul r.PNG" alt=""><div class="cuadro">Cubre Azul Rey</div></div>
+                <div class="card"><img src="cubre rojo.PNG" alt=""><div class="cuadro">Cubre Rojo</div></div>
+                <div class="card"><img src="cubre azul cielo.PNG" alt=""><div class="cuadro">Cubre Azul Cielo</div></div>
+                <div class="card"><img src="cubre amarillo.PNG" alt=""><div class="cuadro">Cubre Amarillo</div></div>
+                <div class="card"><img src="cubre verde.PNG" alt=""><div class="cuadro">Cubre Verde</div></div>
+                <div class="card"><img src="cobre vino.PNG" alt=""><div class="cuadro">Cubre Vino</div></div>
+                <div class="card"><img src="cubre morado.PNG" alt=""><div class="cuadro">Cubre Morado</div></div>
+                <div class="card"><img src="cubre rosa.PNG" alt=""><div class="cuadro">Cubre Rosa</div></div>
+            </div>
+        </div>
+
+        <div id="Carpas" class="seccion">
+            <h2>Carpas</h2>
+            <div class="grid">
+                <div class="card"><img src="carpa 1.JPG" alt=""><div class="cuadro">Carpa elegante</div></div>
+                <div class="card"><img src="carpa 2.JPG" alt=""><div class="cuadro">Carpa 5x5</div></div>
+                <div class="card"><img src="carpa3.JPG" alt=""><div class="cuadro">Carpa 6x12</div></div>
+                <div class="card"><img src="carpa 4.JPG" alt=""><div class="cuadro">Carpa 7x10</div></div>
+                <div class="card"><img src="carpa 5.JPG" alt=""><div class="cuadro">Carpa 5x15</div></div>
+            </div>
+        </div>
+
+        <div id="Lonas" class="seccion">
+            <h2>Lonas</h2>
+            <div class="grid">
+                <div class="card"><img src="3.JPG"><div class="cuadro">Lona de 30x30</div></div>
+                <div class="card"><img src="10x15.JPG" alt=""><div class="cuadro">Lona de 10x15</div></div>
+                <div class="card"><img src="15x20.JPG" alt=""><div class="cuadro">Lona de 15x20</div></div>
+                <div class="card"><img src="20x30.JPG" alt=""><div class="cuadro">Lona de 20x30</div></div>
+                <div class="card"><img src="15x30.JPG" alt=""><div class="cuadro">Lona de 15x30</div></div>
+            </div>
+        </div>
+
+        <div id="Inflables" class="seccion">
+            <h2>Inflables</h2>
+            <div class="grid">
+                <div class="card"><img src="infla 1.jpg" alt=""><div class="cuadro">Castillo Inflable</div></div>
+                <div class="card"><img src="infla 2.jpg" alt=""><div class="cuadro">Tobogán</div></div>
+                <div class="card"><img src="infla 3.JPG" alt=""><div class="cuadro">Tobogán con escaleras</div></div>
+                <div class="card"><img src="infla 4.JPG" alt=""><div class="cuadro">Tobogán alberca</div></div>
+            </div>
+        </div>
+
+        <div id="Banos" class="seccion">
+            <h2>Baños Portátiles</h2>
+            <div class="grid">
+                <div class="card"><img src="baño1.JPG" alt=""><div class="cuadro">Baño</div></div>
+                <div class="card"><img src="banos2.JPG" alt=""><div class="cuadro">Baño</div></div>
+                <div class="card"><img src="banos3.JPG" alt=""><div class="cuadro">Baño</div></div>
+            </div>
+        </div>
+
+        <div id="Copas" class="seccion">
+            <h2>Copas</h2>
+            <div class="grid">
+                <div class="card"><img src="copa1.JPG" alt=""><div class="cuadro">Copa</div></div>
+                <div class="card"><img src="copa2.JPG" alt=""><div class="cuadro">Copa</div></div>
+                <div class="card"><img src="copa3.JPG" alt=""><div class="cuadro">Copa</div></div>
+                <div class="card"><img src="copa4.JPG" alt=""><div class="cuadro">Copa</div></div>
+                <div class="card"><img src="copa5.JPG" alt=""><div class="cuadro">Copa de colores</div></div>
+            </div>
+        </div>
+
+        <div id="PlatoC" class="seccion">
+            <h2>Platos de Cristal</h2>
+            <div class="grid">
+                <div class="card"><img src="plat1.JPG" alt=""><div class="cuadro">Plato chico</div></div>
+                <div class="card"><img src="pla2.JPG" alt=""><div class="cuadro">Plato grande</div></div>
+                <div class="card"><img src="pla3.JPG" alt=""><div class="cuadro">Plato pastelero</div></div>
+            </div>
+        </div>
+
+        <div id="Tazon" class="seccion">
+            <h2>Tazones</h2>
+            <div class="grid">
+                <div class="card"><img src="t1.JPG" alt=""><div class="cuadro">Tazón mediano</div></div>
+                <div class="card"><img src="t2.JPG" alt=""><div class="cuadro">Tazón</div></div>
+                <div class="card"><img src="t3.JPG" alt=""><div class="cuadro">Tazón</div></div>
+            </div>
+        </div>
+
+        <div id="Jarron" class="seccion">
+            <h2>Jarrones</h2>
+            <div class="grid">
+                <div class="card"><img src="ja1.JPG" alt=""><div class="cuadro">Jarrón decorativo</div></div>
+                <div class="card"><img src="ja2.JPG" alt=""><div class="cuadro">Jarrón</div></div>
+                <div class="card"><img src="ja3.JPG" alt=""><div class="cuadro">Jarrón</div></div>
+            </div>
+        </div>
+
+        <div id="Soperas" class="seccion">
+            <h2>Soperas</h2>
+            <div class="grid">
+                <div class="card"><img src="so1.JPG" alt=""><div class="cuadro">Sopera</div></div>
+                <div class="card"><img src="so2.JPG" alt=""><div class="cuadro">Sopera</div></div>
+                <div class="card"><img src="so3.JPG" alt=""><div class="cuadro">Sopera</div></div>
+            </div>
+        </div>
+
+        <div id="Vasos" class="seccion">
+            <h2>Vasos</h2>
+            <div class="grid">
+                <div class="card"><img src="va1.JPG" alt=""><div class="cuadro">Vaso</div></div>
+                <div class="card"><img src="va2.JPG" alt=""><div class="cuadro">Vaso</div></div>
+                <div class="card"><img src="va3.JPG" alt=""><div class="cuadro">Vaso</div></div>
+                <div class="card"><img src="va4.JPG" alt=""><div class="cuadro">Vaso</div></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // FUNCIÓN PARA CAMBIAR EL COLOR DE FONDO ALEATORIAMENTE
+        function cambiarFondo() {
+            // Lista de colores bonitos y claros (pasteles) para que el texto se lea bien
+            const colores = ['#87CEEB', '#FAD02E', '#F28D35', '#D8E2DC', '#FFCAD4', '#B3E5FC', '#C8E6C9', '#FFCCBC'];
+            
+            // Elegir uno al azar
+            const colorAleatorio = colores[Math.floor(Math.random() * colores.length)];
+            
+            // Aplicarlo al cuerpo de la página
+            document.body.style.background = colorAleatorio;
+        }
+
+        // Ejecutar la función en cuanto cargue la página
+        window.onload = cambiarFondo;
+
+        function mostrar(id){
+            document.querySelectorAll('.seccion').forEach(s => s.classList.remove('activa'));
+            const target = document.getElementById(id);
+            if(target) {
+                target.classList.add('activa');
+            }
+        }
+
+        function toggleSub(){
+            let s = document.getElementById("sub");
+            s.style.display = (s.style.display === "block") ? "none" : "block";
+        }
+    </script>
+
+</body>
+</html>
